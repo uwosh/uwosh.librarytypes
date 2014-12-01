@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<rolemap>
+  <permissions>
+    <permission name="uwosh.librarytypes: Add LibraryLink" acquire="False">
+      <role name="Contributor" />
+	  <role name="Editor" />
+      <role name="Owner" />
+      <role name="Manager" />
+    </permission>
+    <permission name="uwosh.librarytypes: Add LibraryStaff" acquire="False">
+      <role name="Contributor" />
+	  <role name="Editor" />
+      <role name="Owner" />
+      <role name="Manager" />
+    </permission>
+  </permissions>
+</rolemap>

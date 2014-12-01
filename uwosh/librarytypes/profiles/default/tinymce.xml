@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<object>
+	
+ <resourcetypes purge="False">
+  <customplugins purge="False">
+    <element value="CatalogLink|/++resource++uwosh.librarytypes.javascript/tinymce_ext.js"/>
+	<element value="ImageUpload|/++resource++uwosh.librarytypes.javascript/tinymce_ext_image.js"/>
+	<element value="VideoEmbed|/++resource++uwosh.librarytypes.javascript/tinymce_ext_video.js"/>
+  </customplugins>
+ </resourcetypes>
+ 
+ <toolbar>
+  <customtoolbarbuttons purge="False">
+  	<element value="CatalogLink"/>
+    <element value="ImageUpload"/>
+    <element value="VideoEmbed"/>
+  </customtoolbarbuttons>
+ </toolbar>
+ 
+</object>

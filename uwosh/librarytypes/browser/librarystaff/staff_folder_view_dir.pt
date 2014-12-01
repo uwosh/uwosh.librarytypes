@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+	
+
+    <metal:content-core fill-slot="content-core">
+    	
+
+	<div id="library_staff_viewer" class="library_staff_dir_width" tal:condition="view/showDisplayOptions">
+		<div>
+			<a tal:attributes="href string:${context/absolute_url}">By Service</a>
+			<span> | Alphabetical</span>
+		</div>
+	</div>
+	
+    <tal:block tal:define="columns python: view.directorySort(view.getChildernObjects());
+						   director view/getDirector;">
+						   	
+		<div class="library_staff_dir library_staff_dir_width" tal:condition="view/hasDirector">
+			<tal:block tal:define="has_phone_office python: (director.fetch.getPhoneOffice != '');
+								   has_phone_desk python: (director.fetch.getPhoneDesk != '');
+								   has_email python: (director.fetch.getEmail != '');
+								   has_fax python: (director.fetch.getFax != '');
+			                      ">
+				
+				<div class="library_staff_push_l_more library_staff_dir_c">
+					<div class="library_staff_push_b library_staff_bold library_staff_font_l"><a tal:attributes="href director/getURL" tal:content="director/Title" /></div>
+					<div class="library_staff_push_b library_staff_bold" tal:content="director/fetch/getPosition"></div>
+					<div class="library_staff_push_b">
+						<label>Email: </label>
+						<a tal:attributes="href string:mailto:${director/fetch/getEmail}" tal:content="director/fetch/getEmail" />
+					</div>
+					<div class="library_staff_push_b" tal:condition="has_phone_office">
+						<label>Office: </label>
+						<span tal:content="director/fetch/getPhoneOffice" />
+					</div>
+					<div class="library_staff_push_b" tal:condition="has_phone_desk">
+						<label>Desk: </label>
+						<span tal:content="director/fetch/getPhoneDesk" />
+					</div>
+					<div class="library_staff_push_b" tal:condition="has_fax">
+						<label>Fax: </label>
+						<span tal:content="director/fetch/getFax" />
+					</div>
+				</div>
+				
+			</tal:block>
+		</div>
+					
+		<div class="library_line library_staff_dir_width"></div>
+		<br />
+									
+		<div class="library_left library_staff_col" tal:repeat="column columns">
+			<div class="library_staff_row" tal:repeat="item column">
+				<tal:block tal:define="has_phone_office python: (item.fetch.getPhoneOffice != '');
+									   has_phone_desk python: (item.fetch.getPhoneDesk != '');
+									   has_email python: (item.fetch.getEmail != '');
+									   has_fax python: (item.fetch.getFax != '');
+				                      ">
+					<div class="library_left library_staff_push_l_more">
+						<div class="library_staff_push_b library_staff_bold library_staff_font_l"><a tal:attributes="href item/getURL" tal:content="item/Title" /></div>
+						<div class="library_staff_push_b library_staff_bold" tal:content="item/fetch/getPosition"></div>
+						<div class="library_staff_push_b">
+							<div class="library_staff_labels_l"><label>Email: </label></div>
+							<a tal:attributes="href string:mailto:${item/fetch/getEmail}" tal:content="item/fetch/getEmail" />
+						</div>
+						<div class="library_staff_push_b" tal:condition="has_phone_office">
+							<div class="library_staff_labels_l"><label>Office: </label></div>
+							<span tal:content="item/fetch/getPhoneOffice" />
+						</div>
+						<div class="library_staff_push_b" tal:condition="has_phone_desk">
+							<div class="library_staff_labels_l"><label>Desk: </label></div>
+							<span tal:content="item/fetch/getPhoneDesk" />
+						</div>
+						<div class="library_staff_push_b" tal:condition="has_fax">
+							<div class="library_staff_labels_l"><label>Fax: </label></div>
+							<span tal:content="item/fetch/getFax" />
+						</div>
+					</div>
+					<div class="library_clear"></div>
+				</tal:block>
+			</div>
+		</div>
+		
+	</tal:block>
+    </metal:content-core>
+
+</body>
+</html>

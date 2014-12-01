@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+    <metal:content-core fill-slot="content-core">
+        <metal:block define-macro="content-core">
+        <p>
+            <span i18n:translate="link_address">The link address is:</span>
+            <a href="#" tal:attributes="href string:${context/proxyWrapper}${context/remote_url}; name context/id"
+                        tal:content="string:${context/proxyWrapper}${context/remote_url}" />
+        </p>
+		
+		<br />
+		
+        <div style="margin: 0 auto;text-align: center;" tal:content="structure context/getVideoEmbed"></div>
+		
+		<br />
+		
+		<div tal:condition="context/hasImageReference"  style="margin: 0 auto;text-align: center;"><a tal:attributes="href string:${context/proxyWrapper}${context/remote_url}"><img tal:attributes="src string: ${context/absolute_url}/imageReference" alt="Link Image"/></a></div>
+		
+        </metal:block>
+    </metal:content-core>
+
+</body>
+</html>

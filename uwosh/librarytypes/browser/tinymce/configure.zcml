@@ -1,0 +1,38 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="uwosh.librarytypes">
+
+  <include package="plone.app.contentmenu" />
+  
+	<browser:page
+		for="*"
+		name="getItem"
+		class=".cataloglink.CatalogLink"
+		template="cataloglink.pt"
+		permission="zope2.View"
+    /> 
+    
+    <browser:page
+		for="*"
+		name="uploadImage"
+		class=".imageupload.ImageUpload"
+		template="imageupload.pt"
+		permission="zope2.View"
+    /> 
+    
+	<browser:page
+		for="*"
+		name="videoEmbed"
+		class=".videoembed.VideoEmbed"
+		template="videoembed.pt"
+		permission="zope2.View"
+    /> 
+    
+    
+    
+</configure>
+
+
+
+

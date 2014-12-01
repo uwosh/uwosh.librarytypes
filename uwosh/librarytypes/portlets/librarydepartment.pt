@@ -1,0 +1,57 @@
+<tal:comment condition="nothing">Standard Department Display</tal:comment>
+<tal:standard condition="view/is_ask_a_dept_widget" >
+	<dl id="library_staff_portlet" class="portlet"  i18n:domain="uwosh.librarytype">
+
+	    <dt class="portletHeader library_portlet_header">
+	    	<span tal:content="view/data/header_title" />
+	    </dt>
+	
+	    <dd class="portletItem odd library_portlet_body">
+	    	
+			<div class="library_staff_push_l" tal:condition="view/show_name" tal:on-error="nothing">
+				<b class="library_staff_item" tal:content="view/data/persons_name" />
+			</div>
+			
+			<div class="library_staff_push_l" tal:condition="view/show_email">
+				<a title="Email" tal:attributes="href string:mailto:${view/data/dept_email}">
+					<span class="library_staff_item" tal:content="view/data/dept_email" />
+				</a>
+			</div>
+			
+			<div class="library_staff_push_l" tal:condition="view/show_phone">
+				<span class="library_staff_item" tal:content="view/data/dept_phone" />
+			</div>
+			<div class="library_staff_push_l" tal:condition="view/show_fax">
+				<span class="library_staff_item" tal:content="view/data/dept_fax" /><i style="color: gray"> (Fax)</i>
+			</div>
+			<div class="library_staff_push_l" tal:condition="view/data/show_chat">
+				<label class="library_staff_item" style="color: #222222">Chat: </label>
+				<span tal:content="structure view/getChatWidget" />
+			</div>
+	    </dd>
+	    
+	    <dd class="portletFooter library_portlet_footer"></dd>
+	
+	</dl>
+</tal:standard>
+
+<tal:comment condition="nothing">Ask A Librarian Display</tal:comment>
+<tal:standard condition="view/is_ask_a_librarian_widget" >
+	<dl id="library_staff_portlet" class="portlet" style="text-align:center;"  i18n:domain="uwosh.librarytype">
+
+	    <dd class="portletItem odd library_portlet_body" style="padding:5px !important;">
+			<a tal:attributes="href string:${view/portalAbsolute}/help">
+				<img tal:attributes="src python: view.portalAbsolute() + '/++resource++uwosh.librarytheme.images/ask-a-librarian.png'" 
+			 		 alt="Ask a Librarian" class="library_big_marg_top" />
+			</a>
+			<div style="padding:3px;" id="lib-header-chat">
+				<tal:block tal:content="structure view/getChatWidget"></tal:block>
+				<a tal:attributes="href string:${view/portalAbsolute}/help">Email</a><span> | </span>
+				<a tal:attributes="href string:${view/portalAbsolute}/help">Phone</a>
+				<br />
+				<a tal:attributes="href string:${view/portalAbsolute}/research/schedule-research-help">Schedule Help</a>
+			</div>
+	    </dd>
+	    
+	</dl>
+</tal:standard>

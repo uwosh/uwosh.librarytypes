@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" i18n:domain="tinymce">
+<head>
+	<title></title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="++resource++uwosh.librarytypes.javascript/tinymce_videoembed.js"></script>
+	<script type="text/javascript">
+		
+		var small = {'width':'240','height':'180'};
+		var med = {'width':'320','height':'240'};
+		var large = {'width':'480','height':'360'};
+		var big = {'width':'640','height':'480'};
+		
+		function size_swap(w,h) {
+			try {
+				var val = jQuery('textarea[name="embedCode"]').val();
+				if (val.length > 20) {
+					val = val.replace(/width="(.*?)"/g, 'width="'+w+'"');
+					val = val.replace(/height="(.*?)"/g, 'height="'+h+'"');
+					jQuery('textarea[name="embedCode"]').val(val);
+				}
+			} catch(e) { console.log("ERROR: " + e); };
+		}
+		
+		function enforce_HD() {
+			try {
+				var val = jQuery('textarea[name="embedCode"]').val();
+				if (val.length > 20) {
+					val = val.replace(/\?/g, '?vq=hd720&amp;');
+					val = val.replace(/\&amp\;\&amp\;/g, '&amp;');
+					jQuery('textarea[name="embedCode"]').val(val);
+				}
+			} catch(e) { console.log("ERROR: " + e); };
+		}
+		
+		function no_enforce_HD() {
+			try {
+				var val = jQuery('textarea[name="embedCode"]').val();
+				if (val.length > 20) {
+					val = val.replace(/vq=hd720/g, '');
+					val = val.replace(/\&amp\;\&amp\;/g, '&amp;');
+					jQuery('textarea[name="embedCode"]').val(val);
+				}
+			} catch(e) { console.log("ERROR: " + e); };
+		}
+	
+		// Get Size Defaults if any...
+		function sizeToggleInit() {
+			var val = jQuery('textarea[name="embedCode"]').val();
+			var found = false;
+			
+			jQuery('select[name="sizeSelection"]').find('option').each(function(i,t){
+				if (val.indexOf('width="' + jQuery(t).val()) != -1) {
+					jQuery(t).attr('selected', true);
+					found = true;
+				}
+				else 
+					jQuery(t).attr('selected', false);
+			});
+			
+			// Default
+			if(!found) 
+				jQuery('select[name="sizeSelection"]').find('option:nth-child(2)').attr('selected',true);
+			
+		}
+		
+		// Get Border Defaults if any...
+		function borderToggleInit() {
+			var val = jQuery('textarea[name="embedCode"]').val();
+			if(val.indexOf('border') == -1) 
+				jQuery('input[name="borderOn"]').attr('checked',false);
+			else
+				jQuery('input[name="borderOn"]').attr('checked',true);
+		}
+		
+		// Get HD Defaults if any...
+		function hdToggleInit() {
+			var val = jQuery('textarea[name="embedCode"]').val();
+			if(val.indexOf('vq=hd720')== -1) 
+				jQuery('input[name="forceHD"]').attr('checked',false);
+			else
+				jQuery('input[name="forceHD"]').attr('checked',true);
+		}
+	
+	
+		function executeAfterPaste() {
+			var text = jQuery('textarea[name="embedCode"]').val();
+			
+			if( text.indexOf('<object') != -1) {
+				jQuery('#ve_size').css('display','block');		
+				jQuery('#ve_border').css('display','block');		
+				jQuery('#ve_hd').css('display','block');		
+				jQuery('#ve_analytics').css('display','none');		
+			}
+			if( text.indexOf('<iframe') != -1) {
+				jQuery('#ve_size').css('display','block');		
+				jQuery('#ve_hd').css('display','none');		
+				jQuery('#ve_border').css('display','none');		
+				jQuery('#ve_analytics').css('display','block');		
+			}
+			
+		}
+	
+		
+		jQuery(document).ready(function(){
+			
+			// STARTUP FUNCTION
+			executeAfterPaste(); // init
+			window.setTimeout(function(){
+				executeAfterPaste(); 
+				sizeToggleInit();
+				borderToggleInit();
+				hdToggleInit();
+			},1000);
+			
+			// PASTE CODE EVENT
+			jQuery('textarea[name="embedCode"]').keyup(function(e){
+				executeAfterPaste();
+				size_swap(med.width, med.height);
+				
+				if(jQuery(this).val().indexOf('youtube') == -1)
+					jQuery('.ve_youtube').show();
+				else
+					jQuery('.ve_youtube').hide();
+			});
+			
+			// SIZE EVENT
+			jQuery('select[name="sizeSelection"]').change(function(){
+				var choice = jQuery(this).find(':selected').val();
+				
+				if(choice == '240')	
+					size_swap(small.width, small.height);
+				else if(choice == '320')	
+					size_swap(med.width, med.height);
+				else if(choice == '480')	
+					size_swap(large.width, large.height);
+				else if(choice == '640')	
+					size_swap(big.width, big.height);
+			});
+			
+			// BORDER EVENT
+			jQuery('input[name="borderOn"]').change(function(){
+				var checked = jQuery(this).is(':checked');
+				var fragment = ' style="border: 1px solid black; display: inline-block; " ';
+				if (checked) {
+					var val = jQuery.trim(jQuery('textarea[name="embedCode"]').val());
+					val = val.replace(/\s/,fragment);
+					jQuery('textarea[name="embedCode"]').val(val);
+					
+				} else {
+					var val = jQuery('textarea[name="embedCode"]').val();
+					val = val.replace(fragment," ");
+					jQuery('textarea[name="embedCode"]').val(val);
+				}
+			});
+			
+			// HD EVENT
+			jQuery('input[name="forceHD"]').change(function(){
+				var checked = jQuery(this).is(':checked');
+				if (checked) 
+					enforce_HD();
+				else
+					no_enforce_HD();
+			});
+			
+		});
+	</script>
+	
+	<style>
+		body { padding-top: 0px; }
+		.ve_youtube { display: none; font-style: italic; color: #8A0808; margin-left: 10px; }
+		.ve_recommendation { font-style: italic; color: gray; font-weight: normal;}
+		#ve_analytics { display: none; font-style: italic; color: #8A0808; margin-left: 10px; }
+		#ve_size, #ve_border, #ve_hd { display: none; }
+	</style>
+	
+</head>
+<body id="video-embed-overlay">
+	
+	<form tal:attributes="action string:${view/portal/absolute_url}/videoEmbed" method="post" enctype="multipart/form-data">
+		<fieldset>
+	    <legend style="color:black;">Video Embed</legend>
+
+			<label>Paste embed code in the box below <span class="ve_youtube">(Youtube is recommended)</span><br />
+				<textarea name="embedCode" rows="8"></textarea>
+				<span id="ve_analytics">(Please use the "old embed style" from youtube if possible, iframe code is not supported.)</span>
+				<br /><br />
+			</label>
+			
+			<label id="ve_size"> Change video size? <br />
+				<select name="sizeSelection">
+					<option value="240">(240x180) Small</option>
+					<option value="320">(320x240) Recommended</option>
+					<option value="480">(480x360) Large</option>
+					<option value="640">(640x480) Big</option>
+				</select>
+				<br /><br />
+			</label>
+			
+			<label id="ve_border"> 
+				<input type="checkbox" name="borderOn" />
+				Add a border?
+				<br /><br />
+			</label>
+			
+			<label id="ve_hd"> 
+				<input type="checkbox" name="forceHD" />
+				Enforce 720p HD by default?
+				<br /><br />
+			</label>
+			
+			<input type="submit" id="insert" name="insert" value="Insert Video" onclick="VideoEmbedDialog.insert();" /> 
+			&nbsp;
+			<input type="submit" id="cancel" name="cancel" value="Cancel" onclick="tinyMCEPopup.close();" />
+			
+	    </fieldset>
+	</form>
+
+</body>
+</html>

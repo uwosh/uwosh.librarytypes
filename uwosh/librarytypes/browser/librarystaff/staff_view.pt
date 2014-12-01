@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+
+    <metal:content-core fill-slot="content-core">
+
+		<tal:block tal:define="has_email python: (context.getEmail() != '');
+							   has_office_room python: (context.getOfficeRoom() != '');
+							   has_office_phone python: (context.getPhoneOffice() != '');
+							   has_desk_phone python: (context.getPhoneDesk() != '');
+							   has_fax python: (context.getFax() != '');
+							   has_dept python: (context.getDepartment() != '');
+							   has_position python: (context.getPosition() != '');
+							   has_education python: (context.getEducation() != '');
+							   has_background python: (context.getBackground() != '');
+							   has_involvement python: (context.getInvolvement() != '');
+                              ">
+							  
+							  
+			<div id="library_staff">
+				<div> 
+				
+					<div class="library_left">
+						
+						<img class="library_staff_img" tal:condition="not: context/hasImage" src="++resource++uwosh.librarytypes.images/default-face.jpg" alt="default-image" />
+						<img class="library_staff_img" tal:condition="context/hasImage" tal:attributes="src string:${context/absolute_url}/imageReference" alt="personal-image" />
+						
+						<br /><br />
+						
+						<div tal:condition="has_email">
+							<div class="library_staff_back"><label>Email</label></div>
+							<div class="library_staff_pad"> <a tal:attributes="href string:mailto:${context/getEmail}" tal:content="context/getEmail" /></div>
+						</div>
+						 
+						<div tal:condition="has_office_phone">
+							<div class="library_staff_back"><label>Office Phone</label></div>
+							<div class="library_staff_pad" tal:content="context/getPhoneOffice"></div>
+						</div>
+						
+						<div tal:condition="has_desk_phone">
+							<div class="library_staff_back"><label>Desk Phone</label></div>
+							<div class="library_staff_pad" tal:content="context/getPhoneDesk"></div>
+						</div>
+						
+						<div tal:condition="has_fax">
+							<div class="library_staff_back"><label>Fax</label></div>
+							<div class="library_staff_pad" tal:content="context/getFax"></div>
+						</div>
+						
+						<div tal:condition="has_office_room">
+							<div class="library_staff_back"><label>Office</label></div>
+							<div class="library_staff_pad" tal:content="context/getOfficeRoom"></div>
+						</div>
+					
+					</div>
+					
+					<div class="library_left library_staff_information">
+						
+						<div tal:condition="has_position">
+				    		<div class="library_staff_back_plain"><label>Title/Responsibility</label></div>
+				    		<div class="library_staff_pad" tal:content="context/getPosition"></div>
+						</div>
+						
+				    	<div tal:condition="has_dept">
+				    		<div class="library_staff_back_plain"><label>Library Division</label></div>
+				    		<div class="library_staff_pad"  tal:content="context/getDepartment"></div>
+						</div>
+						
+						<div tal:condition="has_education">
+				    		<div class="library_staff_back_plain"><label>Education</label></div>
+				    		<div class="library_staff_pad"  tal:content="structure context/getEducation"></div>
+						</div>
+						
+						<div tal:condition="has_background">
+				    		<div class="library_staff_back_plain"><label>Professional Background</label></div>
+				    		<div class="library_staff_pad"  tal:content="structure context/getRawBackground"></div>
+						</div>
+						
+						<div tal:condition="has_involvement">
+				    		<div class="library_staff_back_plain"><label>University and Community Involvement</label></div>
+				    		<div class="library_staff_pad"  tal:content="structure context/getInvolvement"></div>
+						</div>
+						
+					</div>
+					
+					<div class="library_clear"></div>
+					
+				</div>
+				
+				<br />
+				
+				
+			</div>
+		</tal:block>
+		
+    </metal:content-core>
+
+</body>
+</html>

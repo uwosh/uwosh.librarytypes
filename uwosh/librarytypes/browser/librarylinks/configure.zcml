@@ -1,0 +1,20 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="uwosh.librarytypes">
+
+  <include package="plone.app.contentmenu" />
+  
+	<browser:page
+		for="...content.librarylink.ILibraryLink"
+		name="librarylinks_view"
+		class=".librarylinkView.LibraryLinkView"
+		template="librarylink_view.pt"
+		permission="zope2.View"
+    />    
+    
+</configure>
+
+
+
+

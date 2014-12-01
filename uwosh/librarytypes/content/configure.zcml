@@ -1,0 +1,23 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="uwosh.librarytypes">
+
+
+  <class class=".librarylink.ILibraryLink">
+    <require
+        permission="zope2.View"
+        interface=".librarylink.ILibraryLink"
+        />
+  </class>
+  
+  <class class=".librarystaff.ILibraryStaff">
+    <require
+        permission="zope2.View"
+        interface=".librarystaff.ILibraryStaff"
+        />
+  </class>
+  
+  
+  
+</configure>

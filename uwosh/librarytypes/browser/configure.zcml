@@ -1,0 +1,33 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="uwosh.librarytypes">
+
+  <include package="plone.app.contentmenu" />
+  <include package=".librarystaff" />
+  <include package=".librarylinks" />
+  <include package=".tinymce" />
+    
+  <browser:resourceDirectory
+      name="uwosh.librarytypes.images"
+      directory="images"
+      layer="uwosh.librarytypes.interfaces.interfaces.IThemeSpecific"
+      />
+      
+  <browser:resourceDirectory
+      name="uwosh.librarytypes.stylesheets"
+      directory="stylesheets"
+      layer="uwosh.librarytypes.interfaces.interfaces.IThemeSpecific"
+      />
+      
+  <browser:resourceDirectory
+      name="uwosh.librarytypes.javascript"
+      directory="javascript"
+      layer="uwosh.librarytypes.interfaces.interfaces.IThemeSpecific"
+      />      
+
+</configure>
+
+
+
+

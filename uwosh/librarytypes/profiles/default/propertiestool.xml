@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<object name="portal_properties" meta_type="Plone Properties Tool">
+	<object name="external_resources" meta_type="Plone Property Sheet">
+		<property name="proxy_server_url" type="string">http://www.remote.uwosh.edu/login?url=</property>
+		<property name="voyager_holdings_info" type="string">http://oshlib.wisconsin.edu/vwebv/holdingsInfo</property>
+	</object>
+	
+	
+	<object name="site_properties" meta_type="Plone Property Sheet">
+		<property name="image_directory_name" type="string">Images</property>
+		<property name="image_misc_directory_name" type="string">Misc</property>
+	</object>
+	
+	<object name="base_paths" meta_type="Plone Property Sheet">
+		<property name="base_staff_path" type="string">/sites1/library/staff</property>
+	</object>
+	
+	
+</object>

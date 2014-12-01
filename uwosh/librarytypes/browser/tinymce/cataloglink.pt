@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" i18n:domain="tinymce">
+<head>
+	<title i18n:translate="espen_dlg_title"></title>
+	<script type="text/javascript" src="tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="++resource++uwosh.librarytypes.javascript/tinymce_catalog.js"></script>
+	<style>
+		body {
+			padding-top: 0px;
+			font-size: 90%;
+		}
+		.black { color: black; }
+		.input_title { width: 480px; }
+		.input_id {  width: 165px; }
+		.required {
+			 color: darkred; 
+			 padding: 10px;
+		}
+	</style>
+</head>
+<body>
+	
+	<form onsubmit="CatalogLinkDialog.insert();return false;" action="#">
+		
+		<fieldset>
+	    	<legend class="black">Voyager Catalog Item</legend>
+	    
+			<p>This will create a link to the Voyager Catalog.</p>
+		
+			<div><label>Title of Link</label></div>
+			<div>
+				<input id="btitle" class="input_title" name="btitle" type="text" class="text" />
+			</div>
+			
+			<div><label>Bib Identification (BibID)</label></div>
+			<div>
+				<input id="bibid" class="input_id" name="bibid" type="text" class="text" />
+			</div>
+			
+			<div class="required"> * all fields required</div>
+			
+			<input id="server" name="server" type="hidden" value="voyager" />
+			<input id="link" name="link" type="hidden" tal:attributes="value view/getBaseURL" />
+			
+			<div class="mceActionPanel">
+				<input type="button" id="insert" name="insert" value="{#insert}" onclick="CatalogLinkDialog.insert();" />
+				<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+			</div>
+		
+	    </fieldset>
+	
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" i18n:domain="tinymce">
+<head>
+	<title></title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="++resource++uwosh.librarytypes.javascript/tinymce_imageupload.js"></script>
+	<style>
+		body {
+			padding-top: 0px;
+			font-size: 70%;
+		}
+		.a_bold {
+			font-weight: bold; 
+		}
+		
+		.disabled {
+			color: #dddddd;
+		}
+		
+		.fleft {float: left;}
+		.fright {float: right;}
+		
+		a {
+			color: #003399 !important;
+			text-decoration: none !important;
+		}
+		a:hover{
+			text-decoration: underline !important;
+		}
+		
+		.font1 {
+			font-size: 110%;
+		}
+		.warn {
+			background-color: #FF9999;
+			text-align: center;
+		    width: 320px;
+		}
+		
+		.showPointer {cursor: pointer;}
+		
+	</style>
+</head>
+<body>
+	
+	<tal:if condition="python:(request['upload_status'] == 0) and (view.search != 'true')">
+		<form tal:attributes="action string:${context/absolute_url}/uploadImage" method="post" enctype="multipart/form-data">
+			<fieldset>
+		    <legend style="color:black;">Simple Image Insert</legend>
+		    
+				<div>
+					<input id="iufile" name="iufile" type="file" style="width: 600px;" 
+					       onchange="ImageUploadDialog.quick();" size="95"  
+						   accept="image/*" />
+					<input id="upload" name="upload" type="hidden" value="new" />
+					<input id="url_target" name="url_target" type="hidden" tal:attributes="value string:${context/absolute_url}/uploadImage"/>
+				</div>
+				<div id="filechecker" class="warn"></div>
+				
+				<br />
+			
+				<div>
+					<input id="multipleusage" name="multipleusage" type="checkbox" value="main" />
+					<span class="font1">Will this image be used more than once on the website?</span>
+				</div>
+				
+				<br />
+				
+				<div class="mceActionPanel">
+					<input type="submit" id="insert" name="insert" value="Insert Image" />
+					<a class="font1" onclick="ImageUploadDialog.changeSize();" tal:attributes="href string:${context/absolute_url}/portal_skins/tinymce/plugins/ploneimage/ploneimage.htm">
+						or choose an already uploaded image.
+					</a>
+					<!-- href string:${view/getBaseURL}/portal_javascripts/uwosh.librarytheme/plugins/ploneimage/ploneimage.htm -->
+				</div>
+		    </fieldset>
+		</form>
+	</tal:if>
+	
+	<tal:if condition="python:(request['upload_status'] == 1)">
+		<form action="#">
+			<input id="imageUrl" name="imageUrl" type="hidden" tal:attributes="value view/last_upload_url"/>
+			<input id="imageName" name="imageName" type="hidden" tal:attributes="value view/last_upload_name"/>
+		</form>
+		<script>
+			ImageUploadDialog.insert();
+		</script>
+	</tal:if>
+	
+	<tal:if condition="python:(request['upload_status'] == 2)">
+		Upload Failed, please contact your site administrator.
+	</tal:if>
+	
+	<tal:if condition="python:(view.search == 'true')">
+		<!-- If we want a custom lookup...  -->
+	</tal:if>
+
+</body>
+</html>

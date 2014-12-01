@@ -1,0 +1,17 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="uwosh.librarytypes">
+    
+  <plone:portlet
+      name="uwosh.librarytypes.portlets.LibraryDepartmentPortlet"
+      interface=".librarydepartment.ILibraryDepartmentPortlet" 
+      assignment=".librarydepartment.Assignment"
+      view_permission="zope2.View"
+      edit_permission="cmf.ManagePortal"
+      renderer=".librarydepartment.Renderer"
+      addview=".librarydepartment.AddForm"
+      editview=".librarydepartment.EditForm"
+      />
+      
+</configure>

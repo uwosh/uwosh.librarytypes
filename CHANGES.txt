@@ -1,0 +1,97 @@
+Changelog
+=========
+
+0.1.5 
+------------------
+- Removed individual staff portlets
+- Added Embed Button for videos.
+
+0.1.4b 
+------------------
+- Added resolveuid/ to SimpleImage
+
+0.1.3b 
+------------------
+- Adjusted Department Contact Portlet.
+
+0.1.2b 
+------------------
+- Fixed Image Upload Bug.
+
+0.1.1b
+------------------
+- Fixed fax number bug.
+- Add more functionality to deparmental portlets.
+
+0.1.0b
+------------------
+- Uncovered Plone Bug in BrowserView by mistake.
+- Changed method "factory" in imageUpload class.  This causes plone zmi component to puke. 
+- Adjusted Staff Archetype to match the Professional Staff Page Policy document that was just created.
+
+
+0.0.9a
+------------------
+- Fixed relative link issue.
+
+
+0.0.8a
+------------------
+- Fixed staff image.
+- Added new TinyMCE button. Simple Image Upload.
+
+
+0.0.7a
+------------------
+- New two column layout for Staff views.
+- Fixed public/private lookup bug.
+
+
+0.0.6a
+------------------
+- Two column layout for Staff views.
+- Directory now sorts by lastname.
+
+
+0.0.5a
+------------------
+- Adjust layout of staff pages.
+- Allows for multiple chats on one page now.
+
+0.0.4a
+------------------
+- Added new TinyMCE Tool called Voyager Catalog Link
+- Fixed Library Staff Portlet bug, "duplicate vocabulary error..."
+- Fixed Library Staff Directory bug, skipped middle person in directory
+
+
+
+0.0.3a
+------------------
+- Added LibraryStaff Content Type
+- Added LibraryStaff views (basic, directory structure, profiles)
+- Added tal_rendering from input fields.
+- Added a memoize hook.
+
+
+
+0.0.2a
+------------------
+- First egg never seems to work. Same as comments in 0.0.1a
+
+
+0.0.1a
+------------------
+- DO NOT INSTALL THIS RELEASE!
+- Initial Release
+- Migrates any existing uwosh.librarylinks to this product
+- This is now the home of librarylinks
+
+
+
+
+0.0.1 (xxxx-xx-xx)
+------------------
+
+- Created recipe with ZopeSkel
+  [David Hietpas]

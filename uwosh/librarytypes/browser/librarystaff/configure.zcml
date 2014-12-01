@@ -1,0 +1,38 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="uwosh.librarytypes">
+
+    <include package="plone.app.contentmenu" />
+
+
+	<browser:page
+		for="...content.librarystaff.ILibraryStaff"
+		name="staff_page_view"
+		class=".staff_folder_view.LibraryStaffBase"
+		template="staff_view.pt"
+		permission="zope2.View"
+    />
+
+	<browser:page
+		for=".staff_folder_view.ILibraryStaffFolderView"
+		name="staff_folder_view"
+		class=".staff_folder_view.StaffFolderView"
+		template="staff_folder_view.pt"
+		permission="zope2.View"
+    />
+    
+	<browser:page
+		for=".staff_folder_view.ILibraryStaffDirectory"
+		name="directory"
+		class=".staff_folder_view.StaffFolderView"
+		template="staff_folder_view_dir.pt"
+		permission="zope2.View"
+    />
+   
+    
+</configure>
+
+
+
+
